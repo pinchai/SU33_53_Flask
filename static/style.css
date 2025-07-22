@@ -1,0 +1,60 @@
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #b00000;
+    color: white;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-vertical {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #444;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #c82333;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.product-title {
+    font-size: 0.95rem;
+}
+
+.product-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Show 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
