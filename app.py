@@ -251,5 +251,16 @@ def home():
     return render_template('front/home.html', products=products)
 
 
+@app.get('/cart')
+def cart():
+    return render_template('front/cart.html')
+
+
+@app.get('/checkout')
+def checkout():
+    return render_template('front/checkout.html')
+
+
+
 if __name__ == '__main__':
     app.run()
