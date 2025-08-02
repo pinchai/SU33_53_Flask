@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box {
+        height: 100px;
+        width: 100px;
+        float: left;
+        margin: 5px;
+        color: deeppink;
+        font-size: 30px;
+    }
+</style>
+<body>
+{% for i in range(100) %}
+    <div class="box" style="background-color: {{ ['red', 'green', 'yellow'] | random }}">{{ loop.index }}</div>
+{% endfor %}
+</body>
+</html>
