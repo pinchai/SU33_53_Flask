@@ -130,19 +130,24 @@
     cart.innerText = `Cart(${cart_list.length})`
     btn_add_to_cart.forEach(item => {
         item.addEventListener('click', function () {
-            cart_list.push(
-                {
-                    'id': this.getAttribute('data-id'),
-                    'title': this.getAttribute('data-title'),
-                    'qty': 1,
-                    'price': this.getAttribute('data-price'),
-                    'image': this.getAttribute('data-image'),
-                }
-            )
+            let dpl_index = cart_list.findIndex(cart_item => cart_item.title === this.getAttribute('data-title'))
+            if (dpl_index > -1) {
+                cart_list[dpl_index].qty += 1
+            } else {
+                cart_list.push(
+                    {
+                        'id': this.getAttribute('data-id'),
+                        'title': this.getAttribute('data-title'),
+                        'qty': 1,
+                        'price': this.getAttribute('data-price'),
+                        'image': this.getAttribute('data-image'),
+                    }
+                )
+            }
             localStorage.setItem('cart_list', JSON.stringify(cart_list))
             cart.innerText = `Cart(${cart_list.length})`
             Swal.fire({
-                position: "top-end",
+                position: "top-start",
                 icon: "success",
                 title: "Your work has been saved",
                 showConfirmButton: false,
@@ -162,12 +167,14 @@
                                 <td style="width:80px">
                                     <img src="${item.image}" class="img-fluid rounded" alt="Product 1">
                                 </td>
-                                <td>
+                                <td style="width: 120px">
                                     <h6 class="mb-0">${item.title}</h6>
                                 </td>
                                 <td>$${item.price}</td>
                                 <td>
+                                   <span class="btn  btn-sm btn-danger" onclick="removeQty(${index})">-</span>
                                    <strong>${item.qty}</strong>
+                                   <span class="btn btn-sm btn-primary" onclick="addQty(${index})">+</span>
                                 </td>
                                 <td>$${item.qty * item.price}</td>
                                 <td>
@@ -199,14 +206,32 @@
     function total() {
         let total_usd = 0
         let total_khr = 0
-        cart_list.forEach(item=>{
-            total_usd+= (parseFloat(item.qty) * parseFloat(item.price))
+        cart_list.forEach(item => {
+            total_usd += (parseFloat(item.qty) * parseFloat(item.price))
         })
         total_khr = total_usd * 4100
-        total_khr= Math.ceil(total_khr / 100) * 100
+        total_khr = Math.ceil(total_khr / 100) * 100
 
         label_total_usd.innerText = `$${total_usd.toFixed(2)}`
         label_total_khr.innerText = `៛${total_khr.toLocaleString()}`
+    }
+
+    function addQty(index) {
+        cart_list[index].qty++
+        localStorage.setItem('cart_list', JSON.stringify(cart_list))
+        renderCartList()
+        total()
+    }
+
+    function removeQty(index) {
+        if (cart_list[index].qty <= 1) {
+            removeCartItem(index)
+        } else {
+            cart_list[index].qty--
+        }
+        localStorage.setItem('cart_list', JSON.stringify(cart_list))
+        renderCartList()
+        total()
     }
 </script>
 </html>
